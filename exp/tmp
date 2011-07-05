@@ -1,0 +1,33 @@
+﻿
+<field>
+  <essential>
+    <water>
+      volume = 1000
+      taint = 0
+    </water>
+    <bacteria>
+      number = 10
+      term_fission = 10 ** 3
+    </bacteria>
+  </essential>
+
+  <additional>
+    <oxgen>
+      volume = 5000
+      acceptable_density = 3..5
+      halflife_shortage = 10 ** 3
+      halflife_excess = 10 ** 3
+      coefficient = [0, 4.5 * 10 ** (- 3), - 10 ** (- 3)]
+      comsumption = 1
+    </oxgen>
+    <food>
+      volume = 5000
+      acceptable_density = 3..5
+      halflife_shortage = 10 ** 3
+      halflife_excess = 10 ** 3
+      coefficient = [0, 4.5 * 10 ** (- 3), - 10 ** (- 3)]
+      comsumption = 1
+    </food>
+  </additional>
+
+</field>
