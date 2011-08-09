@@ -1,5 +1,6 @@
 
-= 発光バクテリアの増殖・発光モデルの数値計算
+= A simulator with unspecified number of environmental elements for luminous bacteria
 
-バクテリアの増殖・発光メカニズムを探るための数値計算
+  Looking for an breeding and emitting model for luminus bacteria
+
 
