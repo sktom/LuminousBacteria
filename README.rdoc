@@ -1,6 +1,6 @@
 
 = A simulator with unspecified number of environmental elements for luminous bacteria
 
-  Looking for an breeding and emitting model for luminus bacteria
+  Looking for a breeding and emitting model for luminus bacteria
 
 
