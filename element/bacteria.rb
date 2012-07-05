@@ -19,7 +19,7 @@ require '../element/element'
 # 各種条件を満たすと発光する
 class Bacteria < Element
   attr  :brightness  # 発光強度
-	def density; self[:number] / @water[:volume]; end
+  def density; self[:number] / @water[:volume]; end
   # 分裂周期
 
   def routine
@@ -39,26 +39,26 @@ class Bacteria < Element
 
   # 
   def fluctuate_case 
-      # 減少(各要素の濃度に依存する)
-      SYSTEM.each do |id, entity|
-        ad = entity[:acceptable_density]
-        min, max = ad.min, ad.max
-        d = entity.density
+    # 減少(各要素の濃度に依存する)
+    SYSTEM.each do |id, entity|
+      ad = entity[:acceptable_density]
+      min, max = ad.min, ad.max
+      d = entity.density
 
-        case true
-        when ad.cover?(d)
-          # 減少しない
-        when d < min
-          self[:number] = 
-            (self[:number] * d / min) +
-            (self[:number] * (min - d) / min) * (2 ** (- 1.0 / entity[:halflife_shortage]))
-        when max < d
-          self[:number] *= (max / d) ** (1.0 / entity[:halflife_excess])
-        end
+      case true
+      when ad.cover?(d)
+        # 減少しない
+      when d < min
+        self[:number] = 
+          (self[:number] * d / min) +
+          (self[:number] * (min - d) / min) * (2 ** (- 1.0 / entity[:halflife_shortage]))
+      when max < d
+        self[:number] *= (max / d) ** (1.0 / entity[:halflife_excess])
       end
+    end
 
-      # 増加(分裂)
-      fiss
+    # 増加(分裂)
+    fiss
   end
 
   def fluctuate_recurrence

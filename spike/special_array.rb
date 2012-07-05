@@ -1,9 +1,9 @@
 
 module SpecialArray
 
-	def special_method
-		p 'Special? lol'
-	end
+  def special_method
+    p 'Special? lol'
+  end
 
 
 end
