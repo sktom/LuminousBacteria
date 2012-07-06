@@ -4,9 +4,9 @@ module XML
 
   class Document < Hash
 
-    def initialize(xml)
-      stream = File.open(xml, 'r:utf-8')
-      Kernel.send(:define_method, :read_line) do
+    def initialize xml
+      stream = File.open xml, 'r:utf-8'
+      Kernel.send :define_method, :read_line do
         @line = stream.readline
       end
 
@@ -25,7 +25,7 @@ module XML
             eval "self#{ans_chain} ||= {}"
           end
 
-          eval "self[:#{@ans.join('][:')}][:#{$1}] = #{$2}"
+          eval "self[:#{@ans.join '][:'}][:#{$1}] = #{$2}"
         end
         read
       end
@@ -33,9 +33,7 @@ module XML
       read
     end
 
-
   end
-
 
 end
 

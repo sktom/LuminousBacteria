@@ -1,25 +1,30 @@
 
+require 'active_support/inflector'
+Dir.glob("../element/*.rb").each do |path|
+  require path
+end
+
 class System < Hash
 
-  def initialize(exp_name)
+  def initialize exp_name
     @exp_name = exp_name
     @log= Array.new
     require "../util/xmlparser"
     expcase = XML::Document.new("../exp/#{@exp_name}")[:field]
+    Bacteria.set_fluctuation_method expcase[:fluctuation_type]
 
-    Dir.entries('../element/essential').
-      find_all{|f| f =~ /\.rb$/}.each do |e|
+    Dir.glob('../element/essential/*.rb').each do |e|
       require "../element/essential/#{e}"
-      end
+    end
     [:essential, :additional].each do |etype|
       self[etype] ||= Hash.new
       expcase[etype].each do |element, option|
-        self[etype][element] = get_instance(element, option)
+        self[etype][element] = get_instance element, option
       end
     end
   end
 
-  def test(term)
+  def test term
     term.times do
       before_do
       routine
@@ -29,7 +34,7 @@ class System < Hash
   end
 
   def each
-    self[:additional].each{|k, v| yield(k, v) }
+    self[:additional].each{|k, v| yield k, v}
   end
 
   protected
@@ -38,28 +43,28 @@ class System < Hash
   def routine
     bacteria = self[:essential][:bacteria]
     bacteria.routine
-    @log << [bacteria[:number], bacteria[:brightness]]
+    @log << [bacteria[:volume], bacteria[:brightness]]
   end
 
   private
   def output
     file_name = "../result/#{@exp_name}"
-    File.open(file_name, 'w') do |fout|
+    File.open file_name, 'w' do |fout|
       @log.each do |log|
-        fout.puts "#{log[0]} #{log[1]}"
+        fout.puts log.join ' '
       end
     end
     `gnuplot -persist -e "
     plot '#{file_name}' using 1"`
   end
 
-  def get_instance(id, option)
+  def get_instance id, option
     id = id.to_s.camelize
-    id.constantize rescue create_class(id)
-    id.constantize.new(self[:essential][:water], option)
+    id.constantize rescue create_class id
+    id.constantize.new self[:essential][:water], option
   end
 
-  def create_class(id)
+  def create_class id
     eval "class ::#{id.to_s.camelize} < Element; end"
   end
 

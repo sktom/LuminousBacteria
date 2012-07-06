@@ -1,12 +1,13 @@
 ﻿
 <field>
+  fluctuation_type = :case
   <essential>
     <water>
       volume = 1000
       taint = 0
     </water>
     <bacteria>
-      number = 11.394
+      volume = 11.394
       term_fission = 10 ** 3
     </bacteria>
   </essential>

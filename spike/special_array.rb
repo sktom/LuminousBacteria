@@ -8,6 +8,6 @@ module SpecialArray
 
 end
 
-a = [1,2,3]
+a = (1..3).to_a
 a.extend SpecialArray
 a.special_method

@@ -1,12 +1,13 @@
 ﻿
 <field>
+  fluctuation_type = :recurrence
   <essential>
     <water>
       volume = 1000
       taint = 0
     </water>
     <bacteria>
-      number = 10
+      volume = 10
       term_fission = 10 ** 3
     </bacteria>
   </essential>
